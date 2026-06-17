@@ -167,13 +167,17 @@ export default function App() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-emerald-500/15 via-transparent to-transparent blur-3xl pointer-events-none z-0" />
 
       {/* Corporate Spacious Header */}
-      <header className="relative z-10 border-b border-neutral-900 bg-neutral-950/80 backdrop-blur-md sticky top-0 py-4">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <header className="relative z-10 border-b border-neutral-900 bg-neutral-950/80 backdrop-blur-md sticky top-0 py-4 overflow-hidden">
+        {/* Soft Ambient Behind-Logo Backlight for laptop displays */}
+        <div className="absolute -top-12 -left-12 w-48 h-48 bg-emerald-500/10 blur-2xl rounded-full pointer-events-none z-0" />
+
+        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
           <div className="flex items-center space-x-5">
+            {/* Blinding filters stripped away for perfect font legibility on laptops */}
             <img 
               src="/logo.png" 
               alt="CipherCorp Logo" 
-              className="h-24 w-auto max-w-[240px] object-contain transition-all duration-300 hover:scale-105"
+              className="h-24 w-auto max-w-[240px] object-contain transition-transform duration-300 hover:scale-103"
               onError={(e) => { e.target.style.display = 'none'; }} 
             />
             <div className="flex flex-col text-left border-l border-neutral-800 pl-4 py-1">
@@ -240,49 +244,76 @@ export default function App() {
           </div>
         </section>
 
-        {/* CORE SERVICES PLATFORM MATRIX */}
+        {/* OPERATIONAL SERVICES PLATFORM MATRIX BLOCK */}
         <section className="mb-28 border-t border-neutral-900/80 pt-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-xs uppercase tracking-widest text-emerald-400 mb-3">// Commercial Engagements</h2>
             <p className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-neutral-100 font-orbitron">Deployment Pipelines</p>
             <p className="text-neutral-400 text-xs mt-3 font-light">
-              We deliver digital value through two strategic operational channels: tailormade engineering or instant asset licensing.
+              We deliver enterprise value through three strategic operational channels: tailormade engineering, instant asset licensing, or full-scale corporate incubation.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-500/40 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 hover:shadow-[0_0_30px_rgba(52,211,153,0.08)] relative overflow-hidden group">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-mono tracking-widest text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">Pipeline // 01</span>
-                <span className="text-xs font-mono text-neutral-600 uppercase">Custom Build</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            
+            {/* Custom Build Channel */}
+            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-500/40 rounded-2xl p-6 text-left transition-all duration-300 hover:shadow-[0_0_30px_rgba(52,211,153,0.08)] relative overflow-hidden group flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono tracking-widest text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">Pipeline // 01</span>
+                  <span className="text-xs font-mono text-neutral-600 uppercase">Custom Build</span>
+                </div>
+                <h3 className="text-lg font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Bespoke Engineering</h3>
+                <p className="text-neutral-400 text-xs font-light leading-relaxed mb-6">
+                  We design, code, and deploy custom web solutions and application systems built precisely around your operational needs and unique industry specifications. From localized member directories to corporate workflow panels, your script is uniquely hand-engineered.
+                </p>
               </div>
-              <h3 className="text-xl font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Bespoke Engineering</h3>
-              <p className="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed mb-6">
-                We design, code, and deploy custom web solutions and application systems built precisely around your operational needs and unique industry specifications. From localized member directories to corporate workflow panels, your script is uniquely hand-engineered.
-              </p>
-              <ul className="space-y-2 text-xs text-neutral-500 font-mono mb-4 border-t border-neutral-900 pt-4">
-                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Deep Specification Scoping</li>
+              <ul className="space-y-2 text-xs text-neutral-500 font-mono border-t border-neutral-900 pt-4 mt-auto">
                 <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Zero-Template Hand-Coded Architecture</li>
-                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Tailored Functional UI Layouts</li>
+                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Deep Functional UI Layouts</li>
               </ul>
             </div>
 
-            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-400 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-[0_0_20px_rgba(52,211,153,0.03)] hover:shadow-[0_0_35px_rgba(52,211,153,0.15)] relative overflow-hidden group">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-mono tracking-widest text-neutral-950 uppercase bg-emerald-400 border border-emerald-400 px-3 py-1 rounded-full font-bold shadow-[0_0_10px_rgba(52,211,153,0.3)]">Pipeline // 02</span>
-                <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider animate-pulse">Turnkey License</span>
+            {/* Turnkey License Model */}
+            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-500/40 rounded-2xl p-6 text-left transition-all duration-300 hover:shadow-[0_0_30px_rgba(52,211,153,0.08)] relative overflow-hidden group flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono tracking-widest text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">Pipeline // 02</span>
+                  <span className="text-xs font-mono text-neutral-600 uppercase">Product License</span>
+                </div>
+                <h3 className="text-lg font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Ready-Built Apps & Hosting</h3>
+                <p className="text-neutral-400 text-xs font-light leading-relaxed mb-6">
+                  Bypass long development cycles entirely. Acquire our completely developed, fully operational system templates—such as a specialized food delivery app infrastructure or a premium corporate catering desk-side dining setup—and launch instantly under a predictable monthly hosting agreement.
+                </p>
               </div>
-              <h3 className="text-xl font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Ready-Built Application Licensing</h3>
-              <p className="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed mb-6">
-                Bypass long development cycles. Acquire our completely developed, fully operational system templates—such as a specialized food delivery app infrastructure—and launch instantly. We handle full deployment, server management, and technical hosting for a flat, predictable monthly fee.
-              </p>
-              <ul className="space-y-2 text-xs text-neutral-500 font-mono mb-4 border-t border-neutral-900 pt-4">
+              <ul className="space-y-2 text-xs text-neutral-500 font-mono border-t border-neutral-900 pt-4 mt-auto">
                 <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Instant System Instantiation</li>
                 <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Full Server Hosting & Backups Included</li>
-                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Zero Tech Overhead Management Fees</li>
+              </ul>
+            </div>
+
+            {/* Business Startup Package Incubation */}
+            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-400 rounded-2xl p-6 text-left transition-all duration-300 shadow-[0_0_20px_rgba(52,211,153,0.03)] hover:shadow-[0_0_35px_rgba(52,211,153,0.15)] relative overflow-hidden group flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono tracking-widest text-neutral-950 uppercase bg-emerald-400 border border-emerald-400 px-3 py-1 rounded-full font-bold shadow-[0_0_10px_rgba(52,211,153,0.3)]">Pipeline // 03</span>
+                  <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider animate-pulse">Full Incubation</span>
+                </div>
+                <h3 className="text-lg font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Business Startup Package</h3>
+                <p className="text-neutral-400 text-xs font-light leading-relaxed mb-6">
+                  End-to-end framework launching for new entities. We manage foundational registration compliance, position corporate documentation structures, and script a commanding brand identity so your startup commands instant executive authority.
+                </p>
+              </div>
+              <ul className="space-y-1.5 text-xs text-neutral-400 font-mono border-t border-neutral-900 pt-4 mt-auto">
+                <li className="flex items-center"><span className="text-emerald-400 mr-2">1.</span> Business & Tax Registration</li>
+                <li className="flex items-center"><span className="text-emerald-400 mr-2">2.</span> BEE Certification Frameworks</li>
+                <li className="flex items-center"><span className="text-emerald-400 mr-2">3.</span> Structured Business Plans</li>
+                <li className="flex items-center"><span className="text-emerald-400 mr-2">4.</span> Client & Investor Proposals</li>
+                <li className="flex items-center"><span className="text-emerald-400 mr-2">5.</span> Digital Logo & Letterhead Design</li>
               </ul>
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-400 shadow-[0_0_10px_#34d399]" />
             </div>
+
           </div>
         </section>
 
@@ -296,6 +327,7 @@ export default function App() {
             </p>
           </div>
 
+          {/* Core Industry Grid Blocks with Integrated Green Glow Frames */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {industrySectors.map((sector) => {
               const isExpanded = expandedBlock === sector.id;
@@ -316,6 +348,7 @@ export default function App() {
                       {sector.description}
                     </p>
 
+                    {/* Glowing Interactive Button Layout */}
                     <button
                       onClick={() => setExpandedBlock(isExpanded ? null : sector.id)}
                       className={`w-full py-3 px-4 rounded-xl font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center justify-between border ${
