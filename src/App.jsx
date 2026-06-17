@@ -13,14 +13,45 @@ export default function App() {
   // Tracks which industry block is currently expanded to show its TLD scroll-list
   const [expandedBlock, setExpandedBlock] = useState(null);
 
-  const handleLeadSubmit = (e) => {
+  // YOUR VERIFIED LIVE DATA ROUTING GATEWAY
+  const GETFORM_ENDPOINT = 'https://getform.io/f/bjjvpyob';
+
+  const handleLeadSubmit = async (e) => {
     e.preventDefault();
-    if (leadEmail) setLeadSubmitted(true);
+    if (!leadEmail) return;
+
+    // Direct Getform routing straight to your dashboard and Gmail
+    await fetch(GETFORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        email: leadEmail, 
+        formType: 'Hero Lead Briefing',
+        destination: 'ciphorcorp@gmail.com'
+      })
+    });
+
+    setLeadSubmitted(true);
   };
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
-    if (contactName && contactEmail && contactMessage) setContactSubmitted(true);
+    if (!contactName || !contactEmail || !contactMessage) return;
+
+    // Direct Getform routing straight to your dashboard and Gmail
+    await fetch(GETFORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: contactName,
+        email: contactEmail,
+        message: contactMessage,
+        formType: 'Full Communications Terminal Brief',
+        destination: 'ciphorcorp@gmail.com'
+      })
+    });
+
+    setContactSubmitted(true);
   };
 
   // Structured Industry Database with 10 TLD Blueprints each
@@ -132,17 +163,13 @@ export default function App() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 font-mono selection:bg-emerald-500 selection:text-neutral-950 relative overflow-hidden">
       
-      {/* Ambient Cyber Glow Behind Content */}
+      {/* Ambient Cyber Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-emerald-500/15 via-transparent to-transparent blur-3xl pointer-events-none z-0" />
 
-      {/* HEADER OVERHAUL: Strategy 2 Ambient Backdrop Glow Separation */}
+      {/* Corporate Spacious Header */}
       <header className="relative z-10 border-b border-neutral-900 bg-neutral-950/80 backdrop-blur-md sticky top-0 py-4">
-        {/* Soft atmospheric backlight localized behind the logo position */}
-        <div className="absolute top-0 left-6 w-48 h-24 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none -z-10" />
-        
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-5">
-            {/* Logo Image with Glow Removed to Insure Maximum Sharpness and Legibility */}
             <img 
               src="/logo.png" 
               alt="CipherCorp Logo" 
@@ -213,87 +240,49 @@ export default function App() {
           </div>
         </section>
 
-        {/* CORE SERVICES PLATFORM MATRIX: Upgraded to a 3-Column Layout */}
+        {/* CORE SERVICES PLATFORM MATRIX */}
         <section className="mb-28 border-t border-neutral-900/80 pt-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-xs uppercase tracking-widest text-emerald-400 mb-3">// Commercial Engagements</h2>
             <p className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-neutral-100 font-orbitron">Deployment Pipelines</p>
             <p className="text-neutral-400 text-xs mt-3 font-light">
-              We deliver elite value through three structured structural pathways, running from legal setup to enterprise architecture.
+              We deliver digital value through two strategic operational channels: tailormade engineering or instant asset licensing.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            
-            {/* Pipeline 1: Bespoke Specification */}
-            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-500/40 rounded-2xl p-6 text-left transition-all duration-300 hover:shadow-[0_0_30px_rgba(52,211,153,0.06)] relative overflow-hidden flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[9px] font-mono tracking-widest text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">Pipeline // 01</span>
-                  <span className="text-[10px] font-mono text-neutral-600 uppercase">Custom</span>
-                </div>
-                <h3 className="text-lg font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Bespoke Engineering</h3>
-                <p className="text-neutral-400 text-xs font-light leading-relaxed mb-6">
-                  We design, code, and deploy custom web solutions and application systems built precisely around your operational needs and unique industry specifications. Every piece of logic is uniquely hand-engineered.
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-500/40 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 hover:shadow-[0_0_30px_rgba(52,211,153,0.08)] relative overflow-hidden group">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] font-mono tracking-widest text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">Pipeline // 01</span>
+                <span className="text-xs font-mono text-neutral-600 uppercase">Custom Build</span>
               </div>
-              <ul className="space-y-2 text-xs text-neutral-500 font-mono border-t border-neutral-900/60 pt-4 mt-auto">
-                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Deep Scoping & Logic Trees</li>
+              <h3 className="text-xl font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Bespoke Engineering</h3>
+              <p className="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed mb-6">
+                We design, code, and deploy custom web solutions and application systems built precisely around your operational needs and unique industry specifications. From localized member directories to corporate workflow panels, your script is uniquely hand-engineered.
+              </p>
+              <ul className="space-y-2 text-xs text-neutral-500 font-mono mb-4 border-t border-neutral-900 pt-4">
+                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Deep Specification Scoping</li>
                 <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Zero-Template Hand-Coded Architecture</li>
                 <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Tailored Functional UI Layouts</li>
               </ul>
             </div>
 
-            {/* Pipeline 2: Turnkey Licensing */}
-            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-500/40 rounded-2xl p-6 text-left transition-all duration-300 hover:shadow-[0_0_30px_rgba(52,211,153,0.06)] relative overflow-hidden flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[9px] font-mono tracking-widest text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">Pipeline // 02</span>
-                  <span className="text-[10px] font-mono text-neutral-600 uppercase">Managed</span>
-                </div>
-                <h3 className="text-lg font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Ready-Built Assets</h3>
-                <p className="text-neutral-400 text-xs font-light leading-relaxed mb-6">
-                  Bypass long development cycles. Acquire our completely developed system templates—such as a specialized food delivery app—and launch instantly. We handle server management and web hosting for a flat monthly fee.
-                </p>
+            <div className="bg-neutral-900/20 border border-neutral-900/80 hover:border-emerald-400 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-[0_0_20px_rgba(52,211,153,0.03)] hover:shadow-[0_0_35px_rgba(52,211,153,0.15)] relative overflow-hidden group">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] font-mono tracking-widest text-neutral-950 uppercase bg-emerald-400 border border-emerald-400 px-3 py-1 rounded-full font-bold shadow-[0_0_10px_rgba(52,211,153,0.3)]">Pipeline // 02</span>
+                <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider animate-pulse">Turnkey License</span>
               </div>
-              <ul className="space-y-2 text-xs text-neutral-500 font-mono border-t border-neutral-900/60 pt-4 mt-auto">
+              <h3 className="text-xl font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Ready-Built Application Licensing</h3>
+              <p className="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed mb-6">
+                Bypass long development cycles. Acquire our completely developed, fully operational system templates—such as a specialized food delivery app infrastructure—and launch instantly. We handle full deployment, server management, and technical hosting for a flat, predictable monthly fee.
+              </p>
+              <ul className="space-y-2 text-xs text-neutral-500 font-mono mb-4 border-t border-neutral-900 pt-4">
                 <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Instant System Instantiation</li>
-                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Server Hosting & Safe Backups</li>
-                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Zero Tech Overhead Management</li>
+                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Full Server Hosting & Backups Included</li>
+                <li className="flex items-center text-neutral-400"><span className="text-emerald-400 mr-2">✓</span> Zero Tech Overhead Management Fees</li>
               </ul>
-            </div>
-
-            {/* NEW ADDITION - Pipeline 3: Ultimate Business Startup Package */}
-            <div className="bg-neutral-900/20 border border-neutral-800 hover:border-emerald-400 rounded-2xl p-6 text-left transition-all duration-300 shadow-[0_0_20px_rgba(52,211,153,0.02)] hover:shadow-[0_0_35px_rgba(52,211,153,0.15)] relative overflow-hidden flex flex-col justify-between group">
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[9px] font-mono tracking-widest text-neutral-950 uppercase bg-emerald-400 border border-emerald-400 px-2.5 py-0.5 rounded-full font-bold shadow-[0_0_10px_rgba(52,211,153,0.2)]">Pipeline // 03</span>
-                  <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider animate-pulse font-bold">Venture Lab</span>
-                </div>
-                <h3 className="text-lg font-bold uppercase text-neutral-100 font-orbitron mb-3 tracking-wide">Business Startup Package</h3>
-                <p className="text-neutral-400 text-xs font-light leading-relaxed mb-6">
-                  The complete end-to-end framework designed to construct a market-ready corporate entity from absolute scratch. We handle the full administrative, compliance, visual identity, and investor deck modeling pipelines.
-                </p>
-              </div>
-              
-              {/* The 9 Core Core Deliverables Array */}
-              <div className="border-t border-neutral-900/80 pt-4 mt-auto space-y-3">
-                <span className="block text-[10px] font-mono uppercase text-emerald-400/80">// 9 Integrated Deliverables:</span>
-                <div className="grid grid-cols-1 gap-1 text-[11px] font-mono text-neutral-400">
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> Business Registration (CIPC)</div>
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> Corporate Tax Registration</div>
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> Verified BEE Registration</div>
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> Luxury Logo Design Studio</div>
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> Premium Letterhead Design</div>
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> Custom Business Portfolio</div>
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> 3-Year Financial Forecasts</div>
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> Structural Client Proposals</div>
-                  <div className="flex items-center"><span className="text-emerald-400 mr-1.5 font-sans">▪</span> Rigid Investor Pitch Proposals</div>
-                </div>
-              </div>
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-400 shadow-[0_0_10px_#34d399]" />
             </div>
-
           </div>
         </section>
 
